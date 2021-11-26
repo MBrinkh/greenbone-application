@@ -115,4 +115,32 @@
 
 </form>
 
+
+<h3>All computers</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Employee abbreviation</th>
+            <th>MAC address</th>
+            <th>IP address</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for computer in computers %}
+
+        <tr>
+            <td>{{ computer.name }}</td>
+            <td>{{ computer.employee }}</td>
+            <td>{{ computer.macAddress }}</td>
+            <td>{{ computer.ipAddress }}</td>
+            <td>{{ computer.description }}</td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
