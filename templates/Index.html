@@ -42,4 +42,25 @@
 
 </form>
 
+
+<h3>Request computers for employee</h3>
+
+<form method="post" action="/get_computers">
+
+    <label class="field">
+        Employee to request computers for:
+        <select name='employee' required>
+            <option value="" selected>---</option>
+
+            {% for employee in employees %}
+                <option value="{{ employee.abbreviation }}">{{ employee.abbreviation }}</option>
+            {% endfor %}
+            
+        </select>
+    </label> 
+
+    <input type='submit'/>
+
+</form>
+
 {% endblock %}

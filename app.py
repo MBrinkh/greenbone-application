@@ -35,6 +35,7 @@ def index():
 
     return render_template('index.html', employees = db_employees, computers = computers)
 
+
 @app.route('/submit_new_computer', methods=['POST'])
 def submit_new_computer():
 
@@ -44,3 +45,14 @@ def submit_new_computer():
         return render_template('/error.html')
         
     return render_template('submit_new_computer.html', employee = request.form['employee'], computers = response['data'])
+
+
+@app.route('/get_computers', methods=['POST'])
+def get_computers():
+
+    response = client.get(request.form['employee'])
+
+    if not response['success']:
+        return render_template('/error.html')
+        
+    return render_template('get_computers.html', employee = request.form['employee'], computers = response['data'])
