@@ -56,3 +56,25 @@ def get_computers():
         return render_template('/error.html')
         
     return render_template('get_computers.html', employee = request.form['employee'], computers = response['data'])
+
+
+@app.route('/remove_computer', methods=['POST'])
+def remove_computer():
+
+    computer_id = request.form['computer']
+
+    response = client.get_by_id(computer_id)
+
+    if not response['success']:
+        return render_template('/error.html')
+
+    computer = response['data']
+    employee = computer['employee']
+    computer['employee'] = ''
+
+    putresponse = client.put(computer['id'], computer)
+
+    if not putresponse['success']:
+        return render_template('/error.html')
+
+    return render_template('remove_computer.html', computer = computer['name'], employee = employee)
