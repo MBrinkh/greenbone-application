@@ -29,8 +29,4 @@ db_employees = [
 @app.route('/')
 def index():
 
-    response = client.get()
-
-    computers = response['data'] if response['success'] else []
-
-    return render_template('index.html', employees = db_employees, computers = computers)
+    return render_template('index.html')
