@@ -29,4 +29,18 @@ db_employees = [
 @app.route('/')
 def index():
 
-    return render_template('index.html')
+    response = client.get()
+
+    computers = response['data'] if response['success'] else []
+
+    return render_template('index.html', employees = db_employees, computers = computers)
+
+@app.route('/submit_new_computer', methods=['POST'])
+def submit_new_computer():
+
+    response = client.post(request.form)
+
+    if not response['success']:
+        return render_template('/error.html')
+        
+    return render_template('submit_new_computer.html', employee = request.form['employee'], computers = response['data'])

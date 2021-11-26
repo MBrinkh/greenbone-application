@@ -2,6 +2,44 @@
 
 {% block body %}
 
+<h3>Add new computer for employee</h3>
 
+<form method="post" action="/submit_new_computer">
+
+    <label class="field">
+        Computer name: 
+        <input type="text" name="name" required/>
+    </label>
+
+    <label class="field">
+        MAC address:
+        <input type="text" name="macaddress" required/>
+    </label>     
+
+    <label class="field">
+        IP address:
+        <input type="text" name="ipaddress" required/>
+    </label>
+    
+    <label class="field">
+        Employee:
+        <select name='employee' required>
+            <option value="" selected>---</option>
+
+            {% for employee in employees %}
+                <option value="{{ employee.abbreviation }}">{{ employee.abbreviation }}</option>
+            {% endfor %}
+
+        </select>
+    </label>
+    
+    <label class="field">
+        Description: <br/>
+        <textarea type="text" name="description" maxlength="500"></textarea>
+    </label>
+
+    <input type='submit' />
+
+</form>
 
 {% endblock %}
