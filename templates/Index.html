@@ -83,4 +83,36 @@
 
 </form>
 
+
+<h3>Reassign computer to employee</h3>
+
+<form method="post" action="/reassign_computer">
+
+    <label class="field">
+        Computer:
+        <select name='computer' required>
+            <option value="" selected>---</option>
+
+            {% for computer in computers %}
+                <option value="{{ computer.id }}">{{ computer.name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <label class="field">
+        Current owner:
+        <select name='employee' required>
+            <option value="" selected>---</option>
+
+            {% for employee in employees %}
+                <option value="{{ employee.abbreviation }}">{{ employee.abbreviation }}</option>
+            {% endfor %}
+            
+        </select>
+    </label>
+
+    <input type='submit'/>
+
+</form>
+
 {% endblock %}

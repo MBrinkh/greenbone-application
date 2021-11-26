@@ -78,3 +78,24 @@ def remove_computer():
         return render_template('/error.html')
 
     return render_template('remove_computer.html', computer = computer['name'], employee = employee)
+
+
+@app.route('/reassign_computer', methods=['POST'])
+def reassign_computer():
+
+    computer_id = request.form['computer']
+
+    response = client.get_by_id(computer_id)
+
+    if not response['success']:
+        return render_template('/error.html')
+
+    computer = response['data']
+    computer['employee'] = request.form['employee']
+
+    putresponse = client.put(computer['id'], computer)
+
+    if not putresponse['success']:
+        return render_template('/error.html')
+
+    return render_template('reassign_computer.html', computer = computer['name'], employee = request.form['employee'])
