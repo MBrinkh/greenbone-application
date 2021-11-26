@@ -1,8 +1,13 @@
 from flask import Blueprint, request, jsonify
+from notification_client import Notification_Client
 
 
 api_Blueprint = Blueprint('api', __name__)
 
+
+# In a real world scenario this client would be injected via DI with the appropriate configuration
+# in this small scale demo app we will stick with a local initialization
+notification_client = Notification_Client('https://localhost:8080/api/notify')
 
 # This should be done (especially the dirty 'max_id' part) with a real database, but its runtime persistent and easy this way.
 # Real world conditions would call for a docker container running a database engine, with the database mounted as a volume
@@ -14,6 +19,14 @@ db_computers = [
 ]
 
 max_id = 2
+
+
+def check_employee_assigned_3_or_more_computers(abbreviation):
+
+    assigned_computers = len(list(filter(lambda computer: computer['employee'] == abbreviation, db_computers)))
+
+    if assigned_computers >= 3:
+        notification_client.notify(request.form['employee'], 'Employee has 3 or more computers assigned')
 
 
 @api_Blueprint.route('/computer', methods=['GET'])
@@ -53,6 +66,8 @@ def api_computer_post():
 
     db_computers.append(computer)
 
+    check_employee_assigned_3_or_more_computers(request.form['employee'])
+
     return computer, 201
 
 
@@ -69,6 +84,8 @@ def api_computer_put(id):
     computer['macAddress'] = request.form['macAddress']
     computer['ipAddress'] = request.form['ipAddress']
     computer['description'] = request.form['description']
+
+    check_employee_assigned_3_or_more_computers(request.form['employee'])
         
     return computer
 
