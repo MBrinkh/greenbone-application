@@ -1,0 +1,10 @@
+.container {
+    max-width: 70%;
+    margin: auto;
+}
+
+.field {
+    display: block;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
