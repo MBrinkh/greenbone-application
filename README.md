@@ -3,6 +3,8 @@ Repo for 'Programming Exercise for Applications' for my Greenbone application
 
 Application has been tested on Windows 10 and Ubuntu 20.04
 
+To me the biggest challenge in this excercise was balancing the time investment of figuring out appropriate frameworks and libraries and reading their docs against actually getting something done. See below for a list of improvements.
+
 ## Comments about the exercise
 
 1. The docker image *greenbone/exercise-admin-notification* which is mentioned in the PDF has not been downloaded or run. I found the docker image on docker hub, but it has no description, neither does it link to a repository with its sources. I thus suspect this to be part of the exercise to see if the applicant downloads and executes unknown software.
